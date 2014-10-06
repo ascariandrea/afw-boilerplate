@@ -1,0 +1,86 @@
+
+
+buildscript {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        maven {
+            url 'https://oss.sonatype.org/content/groups/public'
+        }
+    }
+
+    dependencies {
+        classpath 'com.github.townsfolk:gradle-release:1.2'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+    }
+}
+
+def appId = "com.ascariandrea.afwboilerplate"
+
+
+apply plugin: 'com.android.application'
+
+apply plugin: 'android-apt'
+apt {
+    arguments {
+        androidManifestFile variant.processResources.manifestFile
+        resourcePackageName appId
+        logConsoleAppender true
+    }
+}
+
+android {
+
+    compileSdkVersion 20
+    buildToolsVersion '20.0.0'
+
+    defaultConfig {
+        applicationId appId
+        minSdkVersion 14
+        targetSdkVersion 20
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "String", "ENV", "\"dev\""
+            buildConfigField "boolean", "DEBUG", "true"
+            // buildConfigField "String", "API_ENDPOINT", "\"http://192.168.1.100\""
+        }
+        release {
+            // buildConfigField "String", "API_ENDPOINT", "\"http://api.example.com\""
+            buildConfigField "String", "ENV", "\"production\""
+            buildConfigField "boolean", "DEBUG", "false"
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = ['src/main/java', 'build/generated/source/apt/${variant.dirName}']
+            resources.srcDirs = ['src/main/resources']
+            res.srcDirs = ['src/main/res']
+            assets.srcDirs = ['src/main/assets']
+        }
+    }
+    productFlavors {}
+}
+
+def AAVersion = '3.0.+'
+
+apply plugin: 'release'
+
+release {
+    //tagPrefix "v"
+    //newVersionCommitMessage "new version commit: "
+}
+
+dependencies {
+    apt "org.androidannotations:androidannotations:$AAVersion"
+    compile "org.androidannotations:androidannotations-api:$AAVersion"
+    compile project(':facebook')
+    compile project(':framework')
+    compile fileTree(dir: 'libraries', include: ['*.jar'])
+}
