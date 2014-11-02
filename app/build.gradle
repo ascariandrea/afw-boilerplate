@@ -80,7 +80,6 @@ release {
 dependencies {
     apt "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"
-    compile project(':facebook')
     compile project(':framework')
     compile fileTree(dir: 'libraries', include: ['*.jar'])
 }
