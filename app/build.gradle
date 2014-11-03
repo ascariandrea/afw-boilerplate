@@ -37,19 +37,14 @@ android {
     defaultConfig {
         applicationId appId
         minSdkVersion 14
-        targetSdkVersion 20
+        targetSdkVersion 19
     }
 
     buildTypes {
         debug {
-            buildConfigField "String", "ENV", "\"dev\""
-            buildConfigField "boolean", "DEBUG", "true"
-            // buildConfigField "String", "API_ENDPOINT", "\"http://192.168.1.100\""
+
         }
         release {
-            // buildConfigField "String", "API_ENDPOINT", "\"http://api.example.com\""
-            buildConfigField "String", "ENV", "\"production\""
-            buildConfigField "boolean", "DEBUG", "false"
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable true
@@ -70,16 +65,10 @@ android {
 
 def AAVersion = '3.0.+'
 
-apply plugin: 'release'
-
-release {
-    //tagPrefix "v"
-    //newVersionCommitMessage "new version commit: "
-}
-
 dependencies {
     apt "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"
-    compile project(':framework')
-    compile fileTree(dir: 'libraries', include: ['*.jar'])
+    provided project(':framework')
 }
+
+apply plugin: 'release'

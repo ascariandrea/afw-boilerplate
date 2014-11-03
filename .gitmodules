@@ -1,6 +1,3 @@
 [submodule "libraries/framework"]
 	path = libraries/framework
 	url = git@github.com:ascariandrea/afw.git
-[submodule "libraries/facebook-sdk"]
-	path = libraries/facebook-sdk
-	url = git@github.com:facebook/facebook-android-sdk.git

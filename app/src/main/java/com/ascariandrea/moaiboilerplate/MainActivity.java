@@ -1,4 +1,4 @@
-package com.ascariandrea.afwboilerplate;
+package com.ascariandrea.moaiboilerplate;
 
 import android.app.Activity;
 
