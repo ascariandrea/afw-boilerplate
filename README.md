@@ -1,4 +1,4 @@
-# AFW BOILERPLATE
+# MOAI BOILERPLATE
 Initial configuration to work with Android Studio, gradle, android annotations e afw.
 
 ===========
@@ -13,7 +13,7 @@ $ git clone --recursive git@github.com:ascariandrea/afw-boilerplate.git
 
 or clone, init and update the submodules
 ```
-$ git clone git@github.com:ascariandrea/afw-boilerplate.git my-app-folder
+$ git clone git@github.com:ascariandrea/moai-boilerplate.git my-app-folder
 $ cd my-app-folder
 $ git submodule init
 $ git submodule update
